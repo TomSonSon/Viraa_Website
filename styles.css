@@ -390,7 +390,6 @@ html {
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     line-height: 1.6;
     margin: 0 0 var(--spacing-lg) 0;
-    white-space: pre-line;
     text-align: center;
     width: 100%;
 }
