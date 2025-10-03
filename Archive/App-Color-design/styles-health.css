@@ -1,0 +1,303 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* HealthColors.swift inspired colors converted to CSS */
+    --health-low-hsl: 142, 69%, 58%;
+    --health-medium-hsl: 48, 100%, 67%;
+    --health-high-hsl: 0, 84%, 60%;
+    --health-primary-hsl: 210, 79%, 46%;
+    
+    /* Gradient colors from HealthColors.swift */
+    --health-low-start: hsl(var(--health-low-hsl));
+    --health-low-end: hsl(142, 69%, 48%);
+    --health-medium-start: hsl(var(--health-medium-hsl));
+    --health-medium-end: hsl(48, 100%, 57%);
+    --health-high-start: hsl(var(--health-high-hsl));
+    --health-high-end: hsl(0, 84%, 50%);
+    --health-primary-start: hsl(var(--health-primary-hsl));
+    --health-primary-end: hsl(210, 79%, 36%);
+    --health-text-start: hsl(var(--health-low-hsl));
+    --health-text-end: hsl(var(--health-medium-hsl));
+    
+    /* Typography */
+    --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --spacing-xxl: 4rem;
+}
+
+body {
+    font-family: var(--font-family);
+    font-weight: 400;
+    line-height: 1.5;
+    color: white;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Health-Inspired Soft Bezier Gradient Background */
+.gradient-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, var(--health-low-start) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, var(--health-medium-start) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, var(--health-primary-start) 0%, transparent 50%),
+        radial-gradient(circle at 60% 60%, var(--health-high-start) 0%, transparent 50%),
+        radial-gradient(circle at 10% 10%, var(--health-low-end) 0%, transparent 50%),
+        radial-gradient(circle at 90% 90%, var(--health-text-end) 0%, transparent 50%),
+        linear-gradient(135deg, var(--health-low-start) 0%, var(--health-low-end) 25%, var(--health-primary-start) 50%, var(--health-medium-start) 75%, var(--health-high-start) 100%);
+    z-index: -1;
+}
+
+/* Add subtle noise texture for professional look */
+.gradient-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0);
+    background-size: 25px 25px;
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+/* Main Content */
+.main-content {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-lg);
+    position: relative;
+    z-index: 1;
+}
+
+.content-container {
+    text-align: center;
+    max-width: 800px;
+    width: 100%;
+}
+
+/* Typography */
+.title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--spacing-lg);
+    background: linear-gradient(135deg, var(--health-text-start) 0%, var(--health-text-end) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    line-height: 1.1;
+}
+
+.subtitle {
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--spacing-xxl);
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    line-height: 1.4;
+}
+
+/* App Store Button */
+.app-store-link {
+    display: inline-block;
+    text-decoration: none;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.app-store-link:hover {
+    transform: translateY(-2px);
+}
+
+.app-store-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    color: white;
+    font-family: var(--font-family);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.app-store-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.app-store-button:hover::before {
+    left: 100%;
+}
+
+.app-store-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.app-store-icon {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+.app-store-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.2;
+}
+
+.download-text {
+    font-size: 0.75rem;
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+.store-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+/* Health-themed accent elements */
+.health-accent {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--health-low-start), var(--health-medium-start));
+    opacity: 0.1;
+    animation: float 6s ease-in-out infinite;
+}
+
+.health-accent:nth-child(1) {
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.health-accent:nth-child(2) {
+    top: 60%;
+    right: 15%;
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(180deg);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        padding: var(--spacing-md);
+    }
+    
+    .content-container {
+        max-width: 100%;
+    }
+    
+    .app-store-button {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+    
+    .app-store-text {
+        align-items: center;
+    }
+    
+    .health-accent {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .subtitle {
+        margin-bottom: var(--spacing-xl);
+    }
+    
+    .app-store-button {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+        padding: var(--spacing-md);
+    }
+    
+    .app-store-text {
+        align-items: center;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .title {
+        -webkit-text-fill-color: white;
+        color: white;
+    }
+    
+    .subtitle {
+        color: white;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .app-store-link {
+        transition: none;
+    }
+    
+    .app-store-button {
+        transition: none;
+    }
+    
+    .health-accent {
+        animation: none;
+    }
+}
