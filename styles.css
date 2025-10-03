@@ -361,6 +361,7 @@ html {
     text-align: center;
     max-width: 800px;
     width: 100%;
+    padding: 0 var(--spacing-lg);
 }
 
 .impress-header-section {
@@ -368,6 +369,7 @@ html {
     flex-direction: column;
     align-items: center;
     gap: var(--spacing-md);
+    width: 100%;
 }
 
 .impress-title {
@@ -386,9 +388,11 @@ html {
     letter-spacing: -0.01em;
     color: #ffffff;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    line-height: 1.4;
+    line-height: 1.6;
     margin: 0 0 var(--spacing-lg) 0;
     white-space: pre-line;
+    text-align: center;
+    width: 100%;
 }
 
 /* Responsive Design for Impress Page */
