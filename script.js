@@ -1,5 +1,18 @@
 // Viraa Health Website - Minimal JavaScript
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
+    // Load app configuration
+    try {
+        const configResponse = await fetch('app-links.json');
+        const config = await configResponse.json();
+        
+        // Update App Store link if needed
+        const appStoreLink = document.querySelector('.app-store-link');
+        if (appStoreLink && config.appStoreLink) {
+            appStoreLink.href = config.appStoreLink;
+        }
+    } catch (error) {
+        console.warn('Could not load app configuration:', error);
+    }
     // Add subtle parallax effect to the gradient background
     const gradientBg = document.querySelector('.gradient-bg');
     
