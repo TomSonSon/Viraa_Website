@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viraa - Protect your Lifestyle.</title>
+    <title>Viraa - Your Health. Understood.</title>
+    <link rel="stylesheet" href="styles-shared.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,15 +14,88 @@
     <div class="gradient-bg"></div>
     
     <main class="main-content">
-        <div class="content-container">
-            <div class="middle-section">
-                <div class="header-section">
-                    <h1 class="title">Viraa</h1>
-                    <p class="subtitle">Stay in Tune. Live Your Way.</p>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="hero-logo">
+                        <h2 class="viraa-brand">Viraa Health</h2>
+                    </div>
+                    <h1 class="hero-title">Your Health. Understood.</h1>
+                    <p class="hero-subtitle">Viraa helps you notice small changes in your wellbeing, empowering you to respond early and stay in rhythm.</p>
+                    <div class="hero-cta">
+                        <a href="https://apps.apple.com/us/app/viraa/id6741229335" class="app-store-link primary-cta" aria-label="Download on the App Store">
+                            <div class="app-store-button">
+                                <svg class="app-store-icon" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M18.71,19.5c-.83,1.24-1.71,2.45-3.05,2.47-1.34,.03-1.77-.79-3.29-.79-1.53,0-2,.77-3.27,.82-1.31,.05-2.3-1.32-3.14-2.53C4.25,17,2.94,12.45,4.7,9.39c.87-1.52,2.43-2.48,4.12-2.51,1.28-.02,2.5,.87,3.29,.87,.78,0,2.26-1.07,3.81-.91,.65,.03,2.47,.26,3.64,1.98-.09,.06-2.17,1.28-2.15,3.81,.03,3.02,2.65,4.03,2.68,4.04-.03,.07-.42,1.44-1.38,2.83M13,3.5c.73-.83,1.94-1.46,2.94-1.5,.13,1.17-.34,2.35-1.04,3.19-.69,.85-1.83,1.51-2.95,1.42-.15-1.15,.41-2.35,1.05-3.11Z"/>
+                                </svg>
+                                <div class="app-store-text">
+                                    <span class="download-text">Download on the</span>
+                                    <span class="store-name">App Store</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-                
-                <div class="button-section">
-                    <a href="https://apps.apple.com/us/app/viraa/id6741229335" class="app-store-link" aria-label="Download Viraa Health on the App Store">
+                <div class="hero-visual">
+                    <div class="iphone-mockup">
+                        <img src="Photos/App_Mockup_straight_v1.png" alt="Viraa Health App Screenshot" class="app-mockup-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="features-container">
+                <div class="features-grid">
+                    <!-- Feature 1: Proactive Wellbeing -->
+                    <div class="feature-card glass-card-blue">
+                        <div class="feature-icon">
+                            <svg class="sf-symbol ecg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Proactive Wellbeing</h3>
+                        <p class="feature-description">Stay ahead of your health with intelligent monitoring and early insights that help you catch potential issues before they escalate.</p>
+                    </div>
+                    
+                    <!-- Feature 2: Understand Your Data -->
+                    <div class="feature-card glass-card-green">
+                        <div class="feature-icon">
+                            <svg class="sf-symbol chart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 3v18h18"/>
+                                <path d="M18 17V9"/>
+                                <path d="M13 17V5"/>
+                                <path d="M8 17v-3"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Understand Your Data</h3>
+                        <p class="feature-description">Connect the dots in your health data with clear, actionable insights that make sense of complex health information.</p>
+                    </div>
+                    
+                    <!-- Feature 3: Guidance When You Need It Most -->
+                    <div class="feature-card glass-card-purple">
+                        <div class="feature-icon">
+                            <svg class="sf-symbol compass-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Guidance When You Need It Most</h3>
+                        <p class="feature-description">Receive personalized recommendations exactly when you need them, based on your unique health patterns and current state.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Enhanced CTA Section -->
+        <section class="final-cta">
+            <div class="cta-container">
+                <h2>Take Control of Your Health.<br>Today.</h2>
+                <div class="cta-button-container">
+                    <a href="https://apps.apple.com/us/app/viraa/id6741229335" class="app-store-link final-cta-button" aria-label="Download Viraa Health">
                         <div class="app-store-button">
                             <svg class="app-store-icon" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M18.71,19.5c-.83,1.24-1.71,2.45-3.05,2.47-1.34,.03-1.77-.79-3.29-.79-1.53,0-2,.77-3.27,.82-1.31,.05-2.3-1.32-3.14-2.53C4.25,17,2.94,12.45,4.7,9.39c.87-1.52,2.43-2.48,4.12-2.51,1.28-.02,2.5,.87,3.29,.87,.78,0,2.26-1.07,3.81-.91,.65,.03,2.47,.26,3.64,1.98-.09,.06-2.17,1.28-2.15,3.81,.03,3.02,2.65,4.03,2.68,4.04-.03,.07-.42,1.44-1.38,2.83M13,3.5c.73-.83,1.94-1.46,2.94-1.5,.13,1.17-.34,2.35-1.04,3.19-.69,.85-1.83,1.51-2.95,1.42-.15-1.15,.41-2.35,1.05-3.11Z"/>
@@ -34,13 +108,16 @@
                     </a>
                 </div>
             </div>
-            
-            <div class="footer-section">
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
                 <a href="https://viraa.eu/impress" class="impress-link" aria-label="Impress">
                     <span class="impress-text">Impressum</span>
                 </a>
             </div>
-        </div>
+        </footer>
     </main>
 
     <script src="script.js"></script>

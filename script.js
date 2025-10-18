@@ -1,52 +1,225 @@
-// Viraa Health Website - Minimal JavaScript
+// Viraa Health Website - Enhanced JavaScript for Both Versions
 document.addEventListener('DOMContentLoaded', async function() {
+    // Detect which version we're on
+    const isModernSaaS = document.querySelector('.hero-section .hero-container');
+    const isMinimalApple = document.querySelector('.hero-section .hero-content');
+    
     // Load app configuration
     try {
         const configResponse = await fetch('app-links.json');
         const config = await configResponse.json();
         
-        // Update App Store link if needed
-        const appStoreLink = document.querySelector('.app-store-link');
-        if (appStoreLink && config.appStoreLink) {
-            appStoreLink.href = config.appStoreLink;
-        }
+        // Update App Store links if needed
+        const appStoreLinks = document.querySelectorAll('.app-store-link');
+        appStoreLinks.forEach(link => {
+            if (config.appStoreLink) {
+                link.href = config.appStoreLink;
+            }
+        });
     } catch (error) {
         console.warn('Could not load app configuration:', error);
     }
-    // Add subtle parallax effect to the gradient background
-    const gradientBg = document.querySelector('.gradient-bg');
     
+    // Enhanced gradient background with fixed height
+    const gradientBg = document.querySelector('.gradient-bg');
     if (gradientBg) {
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const parallax = scrolled * 0.5;
-            gradientBg.style.transform = `translateY(${parallax}px)`;
-        });
+        // Set fixed height to 200vh to cover content and prevent white space
+        gradientBg.style.height = '220vh';
+        gradientBg.style.minHeight = '220vh';
+        
+        // Slower animation for minimal Apple version
+        if (isMinimalApple && !isModernSaaS) {
+            gradientBg.style.animationDuration = '30s';
+        }
+        
+        // Parallax effect for modern SaaS version
+        if (isModernSaaS) {
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const parallax = scrolled * 0.3;
+                gradientBg.style.transform = `translateY(${parallax}px)`;
+            });
+        }
     }
     
-    // Add smooth reveal animation on load
-    const contentContainer = document.querySelector('.content-container');
-    if (contentContainer) {
-        contentContainer.style.opacity = '0';
-        contentContainer.style.transform = 'translateY(30px)';
-        contentContainer.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+    // Enhanced reveal animations
+    const heroSection = document.querySelector('.hero-section');
+    if (heroSection) {
+        heroSection.style.opacity = '0';
+        heroSection.style.transform = 'translateY(40px)';
+        heroSection.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
         
         setTimeout(() => {
-            contentContainer.style.opacity = '1';
-            contentContainer.style.transform = 'translateY(0)';
-        }, 100);
+            heroSection.style.opacity = '1';
+            heroSection.style.transform = 'translateY(0)';
+        }, 200);
     }
     
-    // Add hover effect to app store button
-    const appStoreLink = document.querySelector('.app-store-link');
-    if (appStoreLink) {
-        appStoreLink.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-2px) scale(1.02)';
+    // Modern SaaS: Value proposition strip animation
+    const valuePropStrip = document.querySelector('.value-prop-strip');
+    if (valuePropStrip) {
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const items = entry.target.querySelectorAll('.value-prop-item');
+                    items.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        }, index * 200);
+                    });
+                }
+            });
+        }, observerOptions);
+        
+        observer.observe(valuePropStrip);
+        
+        // Set initial state
+        const items = valuePropStrip.querySelectorAll('.value-prop-item');
+        items.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        });
+    }
+    
+    // Enhanced feature cards animation - all cards animate together
+    const featureCards = document.querySelectorAll('.feature-card');
+    if (featureCards.length > 0) {
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Animate all cards at once when any card comes into view
+                    featureCards.forEach(card => {
+                        card.classList.add('fade-in');
+                    });
+                }
+            });
+        }, observerOptions);
+        
+        // Observe the features section container instead of individual cards
+        const featuresSection = document.querySelector('.features-section');
+        if (featuresSection) {
+            observer.observe(featuresSection);
+        }
+    }
+    
+    // Modern SaaS: Feature showcase animations
+    const featureShowcaseItems = document.querySelectorAll('.feature-showcase-item');
+    if (featureShowcaseItems.length > 0) {
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        featureShowcaseItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(50px)';
+            item.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+            observer.observe(item);
+        });
+    }
+    
+    // Enhanced app store button interactions
+    const appStoreLinks = document.querySelectorAll('.app-store-link');
+    appStoreLinks.forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-3px) scale(1.02)';
         });
         
-        appStoreLink.addEventListener('mouseleave', function() {
+        link.addEventListener('mouseleave', function() {
             this.style.transform = 'translateY(0) scale(1)';
         });
+        
+        // Add click tracking (placeholder for analytics)
+        link.addEventListener('click', function() {
+            console.log('App Store link clicked:', this.href);
+            // Here you would integrate with your analytics
+        });
+    });
+    
+    // Minimal Apple: iPhone mockup hover effects
+    const iphoneMockup = document.querySelector('.iphone-mockup');
+    if (iphoneMockup && isMinimalApple) {
+        iphoneMockup.addEventListener('mouseenter', function() {
+            this.style.transform = 'rotateY(-2deg) rotateX(2deg) scale(1.02)';
+        });
+        
+        iphoneMockup.addEventListener('mouseleave', function() {
+            this.style.transform = 'rotateY(-5deg) rotateX(5deg) scale(1)';
+        });
+    }
+    
+    // Social proof section animation (Modern SaaS)
+    const socialProof = document.querySelector('.social-proof');
+    if (socialProof) {
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const stats = entry.target.querySelectorAll('.stat-item');
+                    stats.forEach((stat, index) => {
+                        setTimeout(() => {
+                            stat.style.opacity = '1';
+                            stat.style.transform = 'translateY(0)';
+                        }, index * 200);
+                    });
+                }
+            });
+        }, observerOptions);
+        
+        observer.observe(socialProof);
+        
+        // Set initial state
+        const stats = socialProof.querySelectorAll('.stat-item');
+        stats.forEach(stat => {
+            stat.style.opacity = '0';
+            stat.style.transform = 'translateY(30px)';
+            stat.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        });
+    }
+    
+    // Smooth scroll behavior for internal links
+    const internalLinks = document.querySelectorAll('a[href^="#"]');
+    internalLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // Performance optimization: Reduce animations on low-end devices
+    if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) {
+        document.body.classList.add('reduced-animations');
     }
 });
 

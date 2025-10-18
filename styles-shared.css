@@ -1,0 +1,419 @@
+/* =============================================================================
+   SHARED BASE STYLES
+   Common styles for both landing page versions
+   ============================================================================= */
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Photo-inspired gradient colors from the uploaded image */
+    --gradient-color-1: #0F2F65; /* Dark blue */
+    --gradient-color-2: #C462B8; /* Darker pinkish-purple */
+    --gradient-color-3: #347BD1; /* Medium vibrant blue */
+    --gradient-color-4: #6890E2; /* Lighter soft blue */
+    --gradient-color-5: #07265C; /* Darker almost black-blue */
+    --gradient-color-6: #A88BDF; /* Soft muted lavender purple */
+    
+    /* Glassmorphism colors */
+    --health-glass: rgba(255, 255, 255, 0.15);
+    --health-glass-border: rgba(255, 255, 255, 0.2);
+    --health-foreground: #ffffff;
+    --health-primary: #347BD1;
+    --health-muted-foreground: rgba(255, 255, 255, 0.8);
+    --health-low: #ff6b6b;
+    --health-background: var(--gradient-color-1);
+    --health-muted: var(--gradient-color-5);
+    
+    /* Typography */
+    --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+    
+    /* Enhanced Spacing - 2x-3x original values */
+    --spacing-xs: 0.75rem;    /* 0.5rem -> 0.75rem */
+    --spacing-sm: 1.5rem;     /* 1rem -> 1.5rem */
+    --spacing-md: 2.5rem;     /* 1.5rem -> 2.5rem */
+    --spacing-lg: 4rem;        /* 2rem -> 4rem */
+    --spacing-xl: 6rem;        /* 3rem -> 6rem */
+    --spacing-xxl: 8rem;       /* 4rem -> 8rem */
+    
+    /* Feature Card Colors */
+    --card-blue: rgba(52, 123, 209, 0.5);
+    --card-green: rgba(104, 206, 147, 0.5);
+    --card-purple: rgba(168, 139, 223, 0.5);
+}
+
+/* Animatable custom properties for gradient focal points */
+@property --g1x { syntax: '<percentage>'; inherits: false; initial-value: 20%; }
+@property --g1y { syntax: '<percentage>'; inherits: false; initial-value: 80%; }
+@property --g2x { syntax: '<percentage>'; inherits: false; initial-value: 80%; }
+@property --g2y { syntax: '<percentage>'; inherits: false; initial-value: 20%; }
+@property --g3x { syntax: '<percentage>'; inherits: false; initial-value: 40%; }
+@property --g3y { syntax: '<percentage>'; inherits: false; initial-value: 40%; }
+@property --g4x { syntax: '<percentage>'; inherits: false; initial-value: 60%; }
+@property --g4y { syntax: '<percentage>'; inherits: false; initial-value: 60%; }
+@property --g5x { syntax: '<percentage>'; inherits: false; initial-value: 10%; }
+@property --g5y { syntax: '<percentage>'; inherits: false; initial-value: 10%; }
+@property --g6x { syntax: '<percentage>'; inherits: false; initial-value: 90%; }
+@property --g6y { syntax: '<percentage>'; inherits: false; initial-value: 90%; }
+
+
+/* Enhanced Gradient Background */
+.gradient-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* Height will be set by JavaScript to cover entire document */
+    /* Default positions mirror initial values from @property so it works without animation support */
+    --g1x: 20%; --g1y: 80%;
+    --g2x: 80%; --g2y: 20%;
+    --g3x: 40%; --g3y: 40%;
+    --g4x: 60%; --g4y: 60%;
+    --g5x: 10%; --g5y: 10%;
+    --g6x: 90%; --g6y: 90%;
+    background: 
+        radial-gradient(circle at var(--g1x) var(--g1y), var(--gradient-color-1) 0%, transparent 50%),
+        radial-gradient(circle at var(--g2x) var(--g2y), var(--gradient-color-2) 0%, transparent 50%),
+        radial-gradient(circle at var(--g3x) var(--g3y), var(--gradient-color-3) 0%, transparent 50%),
+        radial-gradient(circle at var(--g4x) var(--g4y), var(--gradient-color-4) 0%, transparent 50%),
+        radial-gradient(circle at var(--g5x) var(--g5y), var(--gradient-color-5) 0%, transparent 50%),
+        radial-gradient(circle at var(--g6x) var(--g6y), var(--gradient-color-6) 0%, transparent 50%),
+        linear-gradient(135deg, var(--gradient-color-1) 0%, var(--gradient-color-5) 25%, var(--gradient-color-3) 50%, var(--gradient-color-4) 75%, var(--gradient-color-6) 100%);
+    z-index: -1;
+    animation: gradient-move 20s ease-in-out infinite alternate;
+}
+
+body {
+    font-family: var(--font-family);
+    font-weight: 400;
+    line-height: 1.5;
+    color: white;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    /* Ensure no white background shows through */
+    background: transparent;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    /* Ensure no white background shows through */
+    background: transparent;
+}
+
+/* The gradient background height will be managed by JavaScript */
+
+@keyframes gradient-move {
+    0% {
+        --g1x: 20%; --g1y: 80%;
+        --g2x: 80%; --g2y: 20%;
+        --g3x: 40%; --g3y: 40%;
+        --g4x: 60%; --g4y: 60%;
+        --g5x: 10%; --g5y: 10%;
+        --g6x: 90%; --g6y: 90%;
+    }
+    50% {
+        --g1x: 40%; --g1y: 60%;
+        --g2x: 60%; --g2y: 40%;
+        --g3x: 30%; --g3y: 60%;
+        --g4x: 70%; --g4y: 40%;
+        --g5x: 20%; --g5y: 30%;
+        --g6x: 80%; --g6y: 70%;
+    }
+    100% {
+        --g1x: 10%; --g1y: 90%;
+        --g2x: 90%; --g2y: 10%;
+        --g3x: 55%; --g3y: 25%;
+        --g4x: 45%; --g4y: 75%;
+        --g5x: 0%;  --g5y: 25%;
+        --g6x: 100%; --g6y: 75%;
+    }
+}
+
+/* Add subtle noise texture */
+.gradient-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0);
+    background-size: 20px 20px;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* Enhanced Typography */
+.title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--spacing-sm);
+    color: #ffffff;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    line-height: 1.1;
+}
+
+.subtitle {
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--spacing-xs);
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    line-height: 1.4;
+}
+
+/* Enhanced App Store Button */
+.app-store-link {
+    display: inline-block;
+    text-decoration: none;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.app-store-link:hover {
+    transform: translateY(-2px);
+}
+
+.app-store-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    color: white;
+    font-family: var(--font-family);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    min-height: 60px;
+    min-width: 200px;
+}
+
+.app-store-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.app-store-icon {
+    width: 32px;
+    height: 32px;
+    fill: currentColor;
+    flex-shrink: 0;
+}
+
+.app-store-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.2;
+}
+
+.download-text {
+    font-size: 0.875rem;
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+.store-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+/* Enhanced Glassmorphism Components */
+.glass-card {
+    background: var(--health-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--health-glass-border);
+    border-radius: 16px;
+    padding: var(--spacing-lg);
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    color: var(--health-foreground);
+    font-family: var(--font-family);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.glass-card:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Enhanced Feature Cards */
+.feature-card {
+    background: var(--health-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--health-glass-border);
+    border-radius: 16px;
+    padding: var(--spacing-lg);
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    color: var(--health-foreground);
+    font-family: var(--font-family);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.feature-card:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: translateY(-8px);
+}
+
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--spacing-md) auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.sf-symbol {
+    width: 48px;
+    height: 48px;
+    color: #ffffff;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.feature-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--health-foreground);
+    margin: 0 0 var(--spacing-sm) 0;
+    line-height: 1.3;
+}
+
+.feature-description {
+    font-size: 0.875rem;
+    color: var(--health-muted-foreground);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 1024px) {
+    :root {
+        --spacing-lg: 3rem;
+        --spacing-xl: 4.5rem;
+        --spacing-xxl: 6rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --spacing-md: 2rem;
+        --spacing-lg: 2.5rem;
+        --spacing-xl: 3.5rem;
+        --spacing-xxl: 4.5rem;
+    }
+    
+    .app-store-button {
+        padding: var(--spacing-sm) var(--spacing-md);
+        min-width: 180px;
+    }
+    
+    .app-store-text {
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --spacing-sm: 1rem;
+        --spacing-md: 1.5rem;
+        --spacing-lg: 2rem;
+        --spacing-xl: 2.5rem;
+        --spacing-xxl: 3rem;
+    }
+    
+    .app-store-button {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+        padding: var(--spacing-md);
+        min-width: 160px;
+    }
+    
+    .app-store-text {
+        align-items: center;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .title {
+        -webkit-text-fill-color: white;
+        color: white;
+    }
+    
+    .subtitle {
+        color: white;
+    }
+    
+    .glass-card,
+    .feature-card {
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.5);
+    }
+    
+    .feature-title,
+    .feature-description {
+        color: #ffffff;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .gradient-bg {
+        animation: none !important;
+    }
+    
+    .app-store-link,
+    .glass-card,
+    .feature-card {
+        transition: none;
+    }
+    
+    .feature-card {
+        opacity: 1;
+        transform: none;
+    }
+}
