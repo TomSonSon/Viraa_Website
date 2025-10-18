@@ -68,6 +68,8 @@
     left: 0;
     width: 100%;
     /* Height will be set by JavaScript to cover entire document */
+    /* Fallback minimum height to prevent invisible background */
+    min-height: 100vh;
     /* Default positions mirror initial values from @property so it works without animation support */
     --g1x: 20%; --g1y: 80%;
     --g2x: 80%; --g2y: 20%;

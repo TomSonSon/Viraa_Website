@@ -20,12 +20,27 @@ document.addEventListener('DOMContentLoaded', async function() {
         console.warn('Could not load app configuration:', error);
     }
     
-    // Enhanced gradient background with fixed height
+    // Enhanced gradient background with responsive height
     const gradientBg = document.querySelector('.gradient-bg');
     if (gradientBg) {
-        // Set fixed height to 200vh to cover content and prevent white space
-        gradientBg.style.height = '220vh';
-        gradientBg.style.minHeight = '220vh';
+        // Set background height to cover content without causing scroll feedback
+        function updateBackgroundHeight() {
+            // Get the height of the main content, not the entire document
+            const mainContent = document.querySelector('.main-content');
+            if (mainContent) {
+                const contentHeight = mainContent.offsetHeight;
+                gradientBg.style.height = `${contentHeight}px`;
+                gradientBg.style.minHeight = `${contentHeight}px`;
+            } else {
+                // Fallback: use viewport height + a reasonable buffer
+                const viewportHeight = window.innerHeight;
+                gradientBg.style.height = `${viewportHeight * 2}px`;
+                gradientBg.style.minHeight = `${viewportHeight * 2}px`;
+            }
+        }
+        
+        // Initial calculation
+        updateBackgroundHeight();
         
         // Slower animation for minimal Apple version
         if (isMinimalApple && !isModernSaaS) {
@@ -40,6 +55,13 @@ document.addEventListener('DOMContentLoaded', async function() {
                 gradientBg.style.transform = `translateY(${parallax}px)`;
             });
         }
+        
+        // Handle window resize to update background height
+        window.addEventListener('resize', updateBackgroundHeight);
+        
+        // Also update on content changes (like dynamic content loading)
+        const observer = new MutationObserver(updateBackgroundHeight);
+        observer.observe(document.body, { childList: true, subtree: true });
     }
     
     // Enhanced reveal animations

@@ -676,6 +676,58 @@
     }
 }
 
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+    .hero-logo {
+        justify-content: flex-start;
+    }
+    
+    .hero-content {
+        text-align: left;
+    }
+    
+    .primary-cta .app-store-button,
+    .final-cta .app-store-button {
+        min-width: 160px;
+        max-width: 200px;
+        padding: 8px 12px;
+        font-size: 0.75rem;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 8px !important;
+        flex-direction: row !important;
+    }
+    
+    .primary-cta .app-store-button .app-store-icon,
+    .final-cta .app-store-button .app-store-icon {
+        width: 28.8px !important;
+        height: 28.8px !important;
+        flex-shrink: 0 !important;
+        order: 1 !important;
+    }
+    
+    .primary-cta .app-store-button .app-store-text,
+    .final-cta .app-store-button .app-store-text {
+        font-size: 0.75rem;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        order: 2 !important;
+    }
+    
+    .primary-cta .app-store-button .download-text,
+    .final-cta .app-store-button .download-text {
+        font-size: 0.7rem;
+    }
+    
+    .primary-cta .app-store-button .store-name,
+    .final-cta .app-store-button .store-name {
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+}
+
 @media (max-width: 768px) {
     .hero-container,
     .features-container,
@@ -710,6 +762,15 @@
     .feature-description {
         font-size: 0.875rem;
     }
+    
+    /* Override the center alignment for mobile */
+    .hero-logo {
+        justify-content: flex-start !important;
+    }
+    
+    .hero-content {
+        text-align: left !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -727,8 +788,43 @@
     
     .primary-cta .app-store-button,
     .final-cta .app-store-button {
-        min-width: 250px;
-        padding: var(--spacing-md) var(--spacing-lg);
+        min-width: 140px;
+        max-width: 180px;
+        padding: 6px 10px;
+        font-size: 0.7rem;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 6px !important;
+        flex-direction: row !important;
+    }
+    
+    .primary-cta .app-store-button .app-store-icon,
+    .final-cta .app-store-button .app-store-icon {
+        width: 25.2px !important;
+        height: 25.2px !important;
+        flex-shrink: 0 !important;
+        order: 1 !important;
+    }
+    
+    .primary-cta .app-store-button .app-store-text,
+    .final-cta .app-store-button .app-store-text {
+        font-size: 0.7rem;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        order: 2 !important;
+    }
+    
+    .primary-cta .app-store-button .download-text,
+    .final-cta .app-store-button .download-text {
+        font-size: 0.65rem;
+    }
+    
+    .primary-cta .app-store-button .store-name,
+    .final-cta .app-store-button .store-name {
+        font-size: 0.75rem;
+        font-weight: 600;
     }
     
     .feature-card {
